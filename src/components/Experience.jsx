@@ -1,5 +1,5 @@
 import { useFrame, useThree } from "@react-three/fiber";
-import { Room } from "./Room";
+// import { Room } from "./Room";
 import { motion } from "framer-motion-3d";
 import { animate, useMotionValue } from "framer-motion";
 import { useEffect } from "react";
@@ -37,7 +37,6 @@ export const Experience = ({section, menuOpened}) => {
           y: section === 0 ? 0 : -1,
       }}
       >
-      <Room />
       </motion.group>
     </>
   );

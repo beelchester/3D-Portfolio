@@ -1,25 +1,26 @@
 import { motion } from "framer-motion"
+import { Avatar } from "./Avatar";
 
 export const Interface = () => {
-    return (
-        <div className="flex flex-col items-center w-screen">
-            
-        <AboutSection />
-        <ContactSection />
-        </div>
-    );
+  return (
+    <div className="flex flex-col items-center w-screen">
+
+      <AboutSection />
+      <ContactSection />
+    </div>
+  );
 }
 
 const Section = ({ children }) => {
-    return (
-        <motion.section 
-        className="h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col justify-center items-start"
-        initial={{ opacity: 0 , y: 50}}
-        whileInView={{ opacity: 1, y: 0, transition: { duration: 1 ,delay: 0.6}}}
-        >
-        {children}
-        </motion.section>
-    );
+  return (
+    <motion.section
+      className="h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col justify-center items-start"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 0.6 } }}
+    >
+      {children}
+    </motion.section>
+  );
 }
 
 const AboutSection = () => {
@@ -45,7 +46,7 @@ const AboutSection = () => {
           delay: 1.5,
         }}
       >
-      I'm a full-stack developer passionate about
+        I'm a full-stack developer passionate about
         <br />
         making software world a better place.
       </motion.p>

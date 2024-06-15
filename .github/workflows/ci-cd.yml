@@ -45,5 +45,6 @@ jobs:
             rm -rf portfolio
             git clone https://github.com/beelchester/3D-Portfolio.git portfolio
             cd portfolio
+            yarn
             yarn dev --host
 

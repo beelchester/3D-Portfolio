@@ -4,9 +4,10 @@ on:
   push:
     branches:
       - main
+  pull_request:
 
 jobs:
-  build:
+  build-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,6 +25,18 @@ jobs:
       - name: Run build
         run: npm run build
 
+      - name: Run tests
+        run: npm test
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Docker login
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
@@ -36,20 +49,18 @@ jobs:
       - name: Push Docker image
         run: docker push sahilyeole/portfolio:latest
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Deploy to server via SSH
-        uses: appleboy/ssh-action@master
+      - name: Start ssh-agent
+        uses: webfactory/ssh-agent@v0.5.4
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+          ssh-passphrase: ${{ secrets.SSH_PASSPHRASE }}
+
+      - name: Deploy to server via SSH
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << 'EOF'
             docker pull sahilyeole/portfolio:latest
             docker stop portfolio-container || true
             docker rm portfolio-container || true
             docker run -d --name portfolio-container -p 80:3000 sahilyeole/portfolio:latest
+          EOF
 

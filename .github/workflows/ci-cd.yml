@@ -12,15 +12,15 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run build
         run: npm run build
@@ -35,19 +35,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Docker login
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-
-      - name: Build Docker image
-        run: docker build -t sahilyeole/portfolio:latest .
-
-      - name: Push Docker image
-        run: docker push sahilyeole/portfolio:latest
+        uses: actions/checkout@v3
 
       - name: Deploy to server via SSH
         uses: appleboy/ssh-action@master
@@ -57,8 +45,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
-            docker pull sahilyeole/portfolio:latest
-            docker stop portfolio-container || true
-            docker rm portfolio-container || true
-            docker run -d --name portfolio-container -p 80:3000 sahilyeole/portfolio:latest
+            rm -rf portfolio
+            git clone https://github.com/beelchester/3D-Portfolio.git portfolio
+            cd portfolio
+            yarn dev --host
 

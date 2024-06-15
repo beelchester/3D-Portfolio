@@ -46,5 +46,6 @@ jobs:
             git clone https://github.com/beelchester/3D-Portfolio.git portfolio
             cd portfolio
             yarn
-            yarn dev --host
+            yarn build
+            nohup yarn start &
 

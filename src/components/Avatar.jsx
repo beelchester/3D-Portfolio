@@ -16,17 +16,15 @@ export function Avatar(props) {
 
   // animations
   const { animations: standingAnimation } = useFBX('animations/Neutral_Idle.fbx')
-  const { animations: ninjaStartAnimition } = useFBX('animations/Ninja_Start.fbx')
   const { animations: ninjaMoveAnimition } = useFBX('animations/Ninja_Move.fbx')
   const { animations: ninjaIdleAnimition } = useFBX('animations/Ninja_Idle.fbx')
   standingAnimation[0].name = "Standing"
   ninjaMoveAnimition[0].name = "Ninja_Move"
-  ninjaStartAnimition[0].name = "Ninja_Start"
   ninjaIdleAnimition[0].name = "Ninja_Idle"
 
   // actions
   const { actions } = useAnimations(
-    [standingAnimation[0], ninjaMoveAnimition[0], ninjaIdleAnimition[0], ninjaStartAnimition[0]],
+    [standingAnimation[0], ninjaMoveAnimition[0], ninjaIdleAnimition[0]],
     group
   );
 

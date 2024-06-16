@@ -9,7 +9,7 @@ export const Experience = ({ section }) => {
     const contactAvatar = (section == 3) && !isMobile && (window.innerWidth > 800)
     const [animation, setAnimation] = useState("Standing")
     useEffect(() => {
-        if (contactAvatar) {
+        if (contactAvatar && section == 3) {
             setAnimation("Ninja_Move");
             setTimeout(() => {
                 setAnimation("Ninja_Idle");
@@ -18,7 +18,10 @@ export const Experience = ({ section }) => {
         else {
             setAnimation("Standing")
         }
-    }, [contactAvatar])
+        if (section == 0) {
+            setAnimation("Standing")
+        }
+    }, [contactAvatar, section])
     return (
         <>
             <Environment preset="apartment" />

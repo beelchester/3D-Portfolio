@@ -6,13 +6,22 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { Projects } from "../content";
+import { useState, useEffect } from "react";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faXTwitter,
+  faLinkedin,
+  faGithub,
+} from "@fortawesome/free-brands-svg-icons";
 
 
-export const Interface = ({ setSelection }) => {
+
+export const Interface = ({ setSection }) => {
   return (
     <div className="flex flex-col items-center w-screen">
 
-      <AboutSection />
+      <AboutSection setSection={setSection} />
       <ExperienceSection />
       <ProjectsSection />
       <ContactSection />
@@ -32,16 +41,16 @@ const Section = ({ children }) => {
   );
 }
 
-const AboutSection = () => {
+const AboutSection = ({ setSection }) => {
   return (
     <Section>
-      <h1 className="text-6xl font-extrabold leading-snug">
+      <h1 className="sm:text-6xl sm:leading-snug text-4xl font-extrabold leading-snug">
         Hi, I'm
         <br />
         <span className="bg-white px-1 italic">Sahil Yeole</span>
       </h1>
       <motion.p
-        className="text-lg text-gray-600 mt-4"
+        className="sm:text-lg text-[14px] text-gray-600 mt-4"
         initial={{
           opacity: 0,
           y: 25,
@@ -59,24 +68,45 @@ const AboutSection = () => {
         <br />
         making software world a better place.
       </motion.p>
-      <motion.button
-        className={`bg-indigo-600 text-white py-4 px-8 
-      rounded-lg font-bold text-lg mt-16`}
-        initial={{
-          opacity: 0,
-          y: 25,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-        }}
-        transition={{
-          duration: 1,
-          delay: 2,
-        }}
-      >
-        Contact me
-      </motion.button>
+      <div
+        className="flex flex-col">
+        <motion.button
+          className={`bg-indigo-600 text-white py-4 px-8  mt-16
+      rounded-lg font-bold sm:text-lg text-sm`}
+          onClick={() => setSection(3)}
+          initial={{
+            opacity: 0,
+            y: 25,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 1,
+            delay: 2,
+          }}
+        >
+          Contact me
+        </motion.button>
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 25,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 1,
+            delay: 2.5,
+          }}
+          className="w-[80%] flex items-center justify-center "
+        >
+          <Socials />
+        </motion.div>
+      </div>
     </Section>
   );
 };
@@ -85,7 +115,7 @@ const ExperienceSection = () => {
 
   return (
     <Section>
-      <h1 className="text-6xl font-extrabold leading-snug">
+      <h1 className="sm:text-6xl text-4xl font-extrabold leading-snug">
         Skills
       </h1>
       <motion.p
@@ -125,7 +155,7 @@ const ExperienceSection = () => {
           duration: 1,
           delay: 1.5,
         }}
-        className="text-6xl font-extrabold leading-snug pt-8">
+        className="sm:text-6xl text-4xl font-extrabold leading-snug pt-8">
         Experience
       </motion.h1>
       <motion.p
@@ -178,21 +208,21 @@ const ProjectsSection = () => {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   return (
     <Section>
-      <h1 className="text-6xl font-extrabold leading-snug">
+      <h1 className="sm:text-6xl text-4xl pt-8 font-extrabold leading-snug">
         Projects
       </h1>
-      <div className="flex justify-center items-center h-full w-full mt-12">
+      <div className="flex justify-center items-center sm:h-full h-3/4 w-full mt-12">
         <Swiper loop={true} className="mySwiper" navigation={!isMobile} pagination={true} modules={[Navigation, Pagination]}>
           {Projects.map((p) =>
             <SwiperSlide>
               <div className="text-white flex flex-col items-center h-full h-max-[1rem] justify-around p-2 py-5">
-                <h1 className="text-3xl font-extrabold">
+                <a href={p.links[0]} className="sm:text-3xl text-2xl font-extrabold hover:underline">
                   {p.title}
-                </h1>
+                </a>
                 <a href={p.links[0]} className="flex justify-center items-center w-[85%] transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300">
                   <img src={p.img} />
                 </a>
-                <p className="text-lg pb-4">
+                <p className="sm:text-lg text-[15px] pb-4">
                   {p.desc}
                 </p>
               </div>
@@ -205,48 +235,94 @@ const ProjectsSection = () => {
   )
 }
 const ContactSection = () => {
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   return (
     <Section>
-      <h2 className="text-5xl font-bold">Contact me</h2>
-      <div className="mt-8 p-8 rounded-md bg-white w-96 max-w-full">
-        <form>
-          <label for="name" className="font-medium text-gray-900 block mb-1">
-            Name
-          </label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 p-3"
-          />
-          <label
-            for="email"
-            className="font-medium text-gray-900 block mb-1 mt-8"
-          >
-            Email
-          </label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 p-3"
-          />
-          <label
-            for="email"
-            className="font-medium text-gray-900 block mb-1 mt-8"
-          >
-            Message
-          </label>
-          <textarea
-            name="message"
-            id="message"
-            className="h-32 block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 p-3"
-          />
-          <button className="bg-indigo-600 text-white py-4 px-8 rounded-lg font-bold text-lg mt-16 ">
-            Submit
-          </button>
-        </form>
+      <h2 className="sm:text-6xl text-4xl font-bold">Contact me</h2>
+      <div className="flex w-full items-start flex-col">
+        <div className="mt-8 sm:mt-16 sm:p-8 p-4 rounded-md bg-white w-96 max-w-full">
+          <form>
+            <label for="name" className="font-medium text-gray-900 block mb-1">
+              Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 p-3"
+            />
+            <label
+              for="email"
+              className="font-medium text-gray-900 block mb-1 mt-8"
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 p-3"
+            />
+            <label
+              for="email"
+              className="font-medium text-gray-900 block mb-1 mt-8"
+            >
+              Message
+            </label>
+            <textarea
+              name="message"
+              id="message"
+              className="h-32 block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 p-3"
+            />
+            <button className="bg-indigo-600 text-white py-4 px-8 rounded-lg font-bold sm:text-lg text-sm mt-16 ">
+              Submit
+            </button>
+          </form>
+        </div>
+        <div className={`w-96 flex justify-center items-center ${isMobile ? "mt-5 mb-10" : "mt-10"}`}>
+          <a
+            className="bg-indigo-600 rounded-lg flex justify-center items-center h-12 max-w-56 text-white py-4 px-8 sm:text-md text-sm font-bold transition ease-in-out hover:bg-white duration-300 hover:border-2 hover:scale-105 border-indigo-600 hover:text-indigo-600"
+            href="https://bit.ly/sahilyeoleresume">
+            Download Resume
+          </a>
+        </div>
       </div>
-    </Section>
+    </Section >
   );
 };
+
+const Socials = () => {
+  const [isSmall, setIsSmall] = useState(window.innerWidth < 640);
+
+  useEffect(() => {
+    const handleResize = () => setIsSmall(window.innerWidth < 640);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return (
+    <div className="flex  justify-between text-indigo-800 items-center mt-5 w-1/2">
+      <a
+        href="https://www.github.com/beelchester"
+        target="_blank"
+        className="hover:bg-white rounded-xl p-1 mr-2 transition duration-300 ease-in-out"
+      >
+        <FontAwesomeIcon icon={faGithub} size={isSmall ? "md" : "lg"} />
+      </a>
+      <a
+        href="https://x.com/sahil46y"
+        target="_blank"
+        className="hover:bg-white rounded-xl p-1 mr-2 transition duration-300 ease-in-out"
+      >
+        <FontAwesomeIcon icon={faXTwitter} size={isSmall ? "md" : "lg"} />
+      </a>
+      <a
+        href="https://www.linkedin.com/in/sahilyeole/"
+        target="_blank"
+        className="hover:bg-white rounded-xl p-1 mr-2 transition duration-300 ease-in-out"
+      >
+        <FontAwesomeIcon icon={faLinkedin} size={isSmall ? "md" : "lg"} />
+      </a>
+    </div>
+  )
+}

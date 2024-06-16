@@ -9,21 +9,31 @@ import { useFrame } from '@react-three/fiber'
 
 export function Avatar(props) {
 
-  const { animation } = props
+  const { animation, move } = props
 
   const group = useRef()
   const { nodes, materials } = useGLTF('models/6472d00a004f1ebc6498cac0.glb')
 
   // animations
   const { animations: standingAnimation } = useFBX('animations/Neutral_Idle.fbx')
+  const { animations: ninjaStartAnimition } = useFBX('animations/Ninja_Start.fbx')
+  const { animations: ninjaMoveAnimition } = useFBX('animations/Ninja_Move.fbx')
+  const { animations: ninjaIdleAnimition } = useFBX('animations/Ninja_Idle.fbx')
   standingAnimation[0].name = "Standing"
+  ninjaMoveAnimition[0].name = "Ninja_Move"
+  ninjaStartAnimition[0].name = "Ninja_Start"
+  ninjaIdleAnimition[0].name = "Ninja_Idle"
 
   // actions
-  const { actions } = useAnimations([standingAnimation[0]], group)
+  const { actions } = useAnimations(
+    [standingAnimation[0], ninjaMoveAnimition[0], ninjaIdleAnimition[0], ninjaStartAnimition[0]],
+    group
+  );
+
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   useFrame((state) => {
-    if ((state.mouse.x != 0 && state.mouse.y != 0) && !isMobile) {
+    if (move && (state.mouse.x != 0 && state.mouse.y != 0) && !isMobile) {
       let y = (state.mouse.y < 0) ? 0 : state.mouse.y
       let x = state.mouse.x - 0.25
       x = (x < -0.75) ? -0.75 : x
@@ -33,7 +43,7 @@ export function Avatar(props) {
   })
 
   useEffect(() => {
-    actions[animation].reset().play()
+    actions[animation].reset().fadeIn(animation == "Ninja_Move" && 0.5).play();
     return () => {
       actions[animation].reset().fadeOut(0.5)
     }

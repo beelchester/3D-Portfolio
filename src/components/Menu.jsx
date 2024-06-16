@@ -5,7 +5,7 @@ export const Menu = (props) => {
     <>
       <button
         onClick={() => setMenuOpened(!menuOpened)}
-        className="z-20 fixed top-12 md:right-12 right-8 p-3 bg-indigo-600 w-11 h-11 rounded-md"
+        className="z-20 fixed top-12 md:right-12 right-4 p-3 bg-indigo-600 sm:w-11 sm:h-11 w-10 h-10 rounded-md"
       >
         <div
           className={`bg-white h-0.5 rounded-md w-full transition-all ${menuOpened ? "rotate-45  translate-y-0.5" : ""

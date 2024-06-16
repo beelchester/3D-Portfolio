@@ -239,10 +239,10 @@ const ContactSection = () => {
   return (
     <Section>
       <h2 className="sm:text-6xl text-4xl font-bold">Contact me</h2>
-      <div className="flex w-full items-start flex-col">
-        <div className="mt-8 sm:mt-16 sm:p-8 p-4 rounded-md bg-white w-96 max-w-full">
+      <div className="flex w-full sm:items-start items-center flex-col">
+        <div className="mt-8 sm:mt-16 sm:p-8 p-4 rounded-md bg-white sm:w-96 w-[90%] min-w-64 max-w-full">
           <form>
-            <label for="name" className="font-medium text-gray-900 block mb-1">
+            <label for="name" className="font-medium sm:text-lg text-sm text-gray-900 block mb-1">
               Name
             </label>
             <input
@@ -253,7 +253,7 @@ const ContactSection = () => {
             />
             <label
               for="email"
-              className="font-medium text-gray-900 block mb-1 mt-8"
+              className="font-medium text-gray-900 block mb-1 sm:mt-8 mt-4"
             >
               Email
             </label>
@@ -265,7 +265,7 @@ const ContactSection = () => {
             />
             <label
               for="email"
-              className="font-medium text-gray-900 block mb-1 mt-8"
+              className="font-medium text-gray-900 block mb-1 sm:mt-8 mt-4"
             >
               Message
             </label>
@@ -274,12 +274,12 @@ const ContactSection = () => {
               id="message"
               className="h-32 block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 p-3"
             />
-            <button className="bg-indigo-600 text-white py-4 px-8 rounded-lg font-bold sm:text-lg text-sm mt-16 ">
+            <button className="bg-indigo-600 text-white py-4 px-8 rounded-lg font-bold sm:text-lg text-sm sm:mt-16 mt-8 ">
               Submit
             </button>
           </form>
         </div>
-        <div className={`w-96 flex justify-center items-center ${isMobile ? "mt-5 mb-10" : "mt-10"}`}>
+        <div className={`w-96 max-w-full flex justify-center items-center ${isMobile ? "mt-8 mb-8" : "mt-10"}`}>
           <a
             className="bg-indigo-600 rounded-lg flex justify-center items-center h-12 max-w-56 text-white py-4 px-8 sm:text-md text-sm font-bold transition ease-in-out hover:bg-white duration-300 hover:border-2 hover:scale-105 border-indigo-600 hover:text-indigo-600"
             href="https://bit.ly/sahilyeoleresume">

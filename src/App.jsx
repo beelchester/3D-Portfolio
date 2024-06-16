@@ -27,10 +27,22 @@ function App() {
   const [started, setStarted] = useState(false);
   const [menuOpened, setMenuOpened] = useState(false);
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const [showExperience, setShowExperience] = useState(false);
 
   useEffect(() => {
     setMenuOpened(false);
   }, [section]);
+
+  useEffect(() => {
+    if (started && isMobile) {
+      const timer = setTimeout(() => {
+        setShowExperience(true);
+      }, 3000);
+      return () => clearTimeout(timer);
+    } else if (started) {
+      setShowExperience(true);
+    }
+  }, [started, isMobile]);
 
   return (
     <>
@@ -47,9 +59,10 @@ function App() {
             <ScrollManager section={section} onSectionChange={setSection} />
             <Scroll>
               <Suspense>
-                {started && (
-                  <Experience section={section} menuOpened={menuOpened} />
-                )}
+                {
+                  showExperience && (
+                    <Experience section={section} menuOpened={menuOpened} />
+                  )}
               </Suspense>
             </Scroll>
             <Scroll html>

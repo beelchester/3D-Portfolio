@@ -7,7 +7,6 @@ export const LoadingScreen = (props) => {
   const [over, setOver] = useState(false)
 
   useEffect(() => {
-    console.log(progress, total, loaded, item);
     if (progress === 100) {
       setOver(true);
       setTimeout(() => {

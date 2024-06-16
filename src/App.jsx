@@ -9,6 +9,8 @@ import { LoadingScreen } from "./components/LoadingScreen";
 import { Menu } from "./components/Menu";
 import { ScrollManager } from "./components/ScrollManager";
 import { framerMotionConfig } from "./config";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CustomCamera = () => {
   const { camera } = useThree();
@@ -46,6 +48,7 @@ function App() {
 
   return (
     <>
+      <ToastContainer />
       <LoadingScreen started={started} setStarted={setStarted} />
       <MotionConfig
         transition={{

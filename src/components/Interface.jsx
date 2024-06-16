@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import emailjs from "@emailjs/browser";
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -6,7 +7,9 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { Projects } from "../content";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -20,7 +23,6 @@ import {
 export const Interface = ({ setSection }) => {
   return (
     <div className="flex flex-col items-center w-screen">
-
       <AboutSection setSection={setSection} />
       <ExperienceSection />
       <ProjectsSection />
@@ -236,30 +238,53 @@ const ProjectsSection = () => {
 }
 const ContactSection = () => {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const form = useRef(null);
+  const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+  const sendEmail = (e) => {
+    e.preventDefault();
+    form.current &&
+      emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY).then(
+        () => {
+          toast.success("Message sent successfully", { autoClose: 4000 });
+          if (form.current) {
+            (form.current).reset();
+          }
+        },
+        () => {
+          toast.error("Failed to send message", { autoClose: 4000 });
+        }
+      );
+  };
+
   return (
     <Section>
       <h2 className="sm:text-6xl text-4xl font-bold">Contact me</h2>
       <div className="flex w-full sm:items-start items-center flex-col">
         <div className="mt-8 sm:mt-16 sm:p-8 p-4 rounded-md bg-white sm:w-96 w-[90%] min-w-64 max-w-full">
-          <form>
-            <label for="name" className="font-medium sm:text-lg text-sm text-gray-900 block mb-1">
+          <form
+            ref={form}
+            onSubmit={sendEmail}
+          >
+            <label for="from_name" className="font-medium sm:text-lg text-sm text-gray-900 block mb-1">
               Name
             </label>
             <input
               type="text"
-              name="name"
+              name="from_name"
               id="name"
               className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 p-3"
             />
             <label
-              for="email"
+              for="from_email"
               className="font-medium text-gray-900 block mb-1 sm:mt-8 mt-4"
             >
               Email
             </label>
             <input
               type="email"
-              name="email"
+              name="from_email"
               id="email"
               className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 p-3"
             />

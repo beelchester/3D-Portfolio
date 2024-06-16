@@ -275,6 +275,7 @@ const ContactSection = () => {
               name="from_name"
               id="name"
               className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 p-3"
+              required={true}
             />
             <label
               for="from_email"
@@ -287,6 +288,7 @@ const ContactSection = () => {
               name="from_email"
               id="email"
               className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 p-3"
+              required={true}
             />
             <label
               for="email"
@@ -298,6 +300,7 @@ const ContactSection = () => {
               name="message"
               id="message"
               className="h-32 block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 p-3"
+              required={true}
             />
             <button className="bg-indigo-600 text-white py-4 px-8 rounded-lg font-bold sm:text-lg text-sm sm:mt-16 mt-8 ">
               Submit

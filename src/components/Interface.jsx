@@ -175,9 +175,10 @@ const ExperienceSection = () => {
           delay: 2,
         }}
       >
-        <h2 className="text-2xl font-extrabold">
+        <a href="https://github.com/rustdesk/rustdesk/pulls?q=is:pr+author:beelchester"
+          className="text-2xl font-extrabold underline hover:cursor-pointer">
           RustDesk
-        </h2>
+        </a>
         <p className="font-bold">SDE Intern</p>
         <p className="">August 2023 - January 2024</p>
 

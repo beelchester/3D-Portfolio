@@ -9,7 +9,7 @@ import { useFrame } from '@react-three/fiber'
 
 export function Avatar(props) {
 
-  const { animation, move } = props
+  const { animation, move, section } = props
 
   const group = useRef()
   const { nodes, materials } = useGLTF('models/6472d00a004f1ebc6498cac0.glb')
@@ -41,9 +41,13 @@ export function Avatar(props) {
   })
 
   useEffect(() => {
-    actions[animation].reset().fadeIn(animation == "Ninja_Move" && 0.5).play();
+    let curAnimation = animation
+    if ((curAnimation == "Ninja_Move" || curAnimation == "Ninja_Idle") && section == 0) {
+      curAnimation = "Standing"
+    }
+    actions[curAnimation].reset().fadeIn(curAnimation == "Ninja_Move" && 0.5).play();
     return () => {
-      actions[animation].reset().fadeOut(0.5)
+      actions[curAnimation].reset().fadeOut(0.5)
     }
   }, [animation])
 

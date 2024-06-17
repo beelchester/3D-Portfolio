@@ -26,7 +26,7 @@ export const Experience = ({ section }) => {
         <>
             <Environment preset="apartment" />
             <group position-y={contactAvatar ? "-6.8" : "-1"} rotation-x={-Math.PI / 2} position-z={contactAvatar && 4} rotation-z={contactAvatar && -0.7} position-x={contactAvatar && 0.2}>
-                <Avatar animation={animation} move={!contactAvatar} />
+                <Avatar animation={animation} move={!contactAvatar} section={section} />
             </group>
         </>
     );

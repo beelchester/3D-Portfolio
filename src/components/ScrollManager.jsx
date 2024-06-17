@@ -32,8 +32,9 @@ export const ScrollManager = (props) => {
       return;
     }
 
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     const curSection = Math.floor(data.scroll.current * data.pages);
-    if (curSection == 3) {
+    if (curSection == 3 && !isMobile) {
       onSectionChange(3);
     }
     if (data.scroll.current > lastScroll.current && curSection === 0) {

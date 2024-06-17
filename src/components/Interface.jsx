@@ -217,7 +217,7 @@ const ProjectsSection = () => {
       <div className="flex justify-center items-center sm:h-full h-3/4 w-full mt-12">
         <Swiper loop={true} className="mySwiper" navigation={!isMobile} pagination={true} modules={[Navigation, Pagination]}>
           {Projects.map((p) =>
-            <SwiperSlide>
+            <SwiperSlide key={p.title}>
               <div className="text-white flex flex-col items-center h-full h-max-[1rem] justify-around p-2 py-5">
                 <a href={p.links[0]} className="sm:text-3xl text-2xl font-extrabold hover:underline">
                   {p.title}

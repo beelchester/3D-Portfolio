@@ -11,6 +11,7 @@ import { ScrollManager } from "./components/ScrollManager";
 import { framerMotionConfig } from "./config";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Analytics } from "@vercel/analytics/react"
 
 const CustomCamera = () => {
   const { camera } = useThree();
@@ -49,6 +50,7 @@ function App() {
   return (
     <>
       <ToastContainer />
+      <Analytics />
       <LoadingScreen started={started} setStarted={setStarted} />
       <MotionConfig
         transition={{

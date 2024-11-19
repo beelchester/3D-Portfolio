@@ -135,11 +135,11 @@ const ExperienceSection = () => {
           delay: 1,
         }}
       >
-        <strong>Programming languages:</strong> Typescript, Rust, Go, Python
+        <strong>Programming languages:</strong> TypeScript, Rust, Go, Python, C, Dart
         <br />
         <strong>Front-End Tech:</strong> NextJS, React, React Native, Flutter, Redux, TailwindCSS
         <br />
-        <strong>Back-End Tech:</strong> Node, Express, Prisma, GraphQL, MongoDB, PostgreSQL
+        <strong>Back-End Tech:</strong> Node, Express, Prisma, GraphQL, Actix, Gin, MongoDB, PostgreSQL
         <br />
         <strong>DevOps:</strong> Docker, CI/CD, GitHub Actions
         <br />
@@ -161,7 +161,7 @@ const ExperienceSection = () => {
         Experience
       </motion.h1>
       <motion.p
-        className="text-sm md:text-lg overflow-scroll text-indigo-900 mt-4"
+        className="text-sm md:text-lg text-indigo-900 mt-4 h-[50%]"
         initial={{
           opacity: 0,
           y: 25,
@@ -175,33 +175,60 @@ const ExperienceSection = () => {
           delay: 2,
         }}
       >
-        <a href="https://github.com/rustdesk/rustdesk/pulls?q=is:pr+author:beelchester"
-          className="text-2xl font-extrabold underline hover:cursor-pointer">
-          RustDesk
-        </a>
-        <p className="font-bold">SDE Intern</p>
-        <p className="">August 2023 - January 2024</p>
+        <div className="bg-white bg-opacity-90 rounded-lg p-4 shadow-md h-[50%] overflow-scroll">
+          <a href="https://github.com/tailcallhq"
+            className="text-2xl font-extrabold underline hover:cursor-pointer">
+            Tailcall
+          </a>
+          <p className="font-bold">SDE Intern</p>
+          <p className="">July 2024 - September 2024</p>
 
-        <p className="pt-3">
-          Rustdesk, ranked among the top 4 Rust projects on GitHub and funded by OSS Capital, is an open-source remote desktop software developed in Rust and Flutter.
+          <p className="pt-3">
+            Tailcall is an emerging open-source Rust project that provides easy orchestration to build high-performance GraphQL backends.
 
-          <br />
-          • Fixed over 30 bugs, enhancing software stability and user experience.
+            <br />
+            • Enhanced the implementation of GraphQL benchmarks for comparing the performance of various GraphQL frameworks, resulting in more accurate and diverse benchmark cases.
+            <br />
+            • Developed and integrated Grafana K6 testing with InfluxDB for storage, utilizing Grafana visualizations to generate automated performance graphs.
+            <br />
+            • Optimized the utilization of LLMs to enhance Tailcall’s schema generation capabilities.
+            <br />
+            • Implemented a feature to support custom headers for gRPC reflection server requests.
+            <br />
+            • Developed a reliable workflow for automating the publication of blogs to external platforms.
+            <br />
+          </p>
 
-          <br />
-          • Implemented multiple features, prioritizing improvements for Wayland Linux and Windows support and UI enhancements.
+        </div>
+        <div className="bg-white bg-opacity-90 rounded-lg p-4 shadow-md mt-4 h-[50%] overflow-scroll">
+          <a href="https://github.com/rustdesk/rustdesk/pulls?q=is:pr+author:beelchester"
+            className="text-2xl font-extrabold underline hover:cursor-pointer">
+            RustDesk
+          </a>
+          <p className="font-bold">SDE Intern</p>
+          <p className="">August 2023 - January 2024</p>
 
-          <br />
-          • Introduced a scam alert feature, leading to a reduction in fraudulent activities.
+          <p className="pt-3">
+            Rustdesk, ranked among the top 4 Rust projects on GitHub and funded by OSS Capital, is an open-source remote desktop software developed in Rust and Flutter.
 
-          <br />
-          • Continued involvement post-internship by collaborating on a funded feature for Auto Display Switch upon cursor/window switch during remote sessions.
+            <br />
+            • Fixed over 30 bugs, enhancing software stability and user experience.
 
-          <br />
-          • Played a key role in the project’s growth, contributing to a substantial increase in GitHub stars from 40k to 65k.
-          <br />
-        </p>
+            <br />
+            • Implemented multiple features, prioritizing improvements for Wayland Linux and Windows support and UI enhancements.
 
+            <br />
+            • Introduced a scam alert feature, leading to a reduction in fraudulent activities.
+
+            <br />
+            • Continued involvement post-internship by collaborating on a funded feature for Auto Display Switch upon cursor/window switch during remote sessions.
+
+            <br />
+            • Played a key role in the project’s growth, contributing to a substantial increase in GitHub stars from 40k to 65k.
+            <br />
+          </p>
+
+        </div>
       </motion.p>
     </Section>
   );
@@ -311,7 +338,7 @@ const ContactSection = () => {
         <div className={`w-96 max-w-full flex justify-center items-center ${isMobile ? "mt-8 mb-8" : "mt-10"}`}>
           <a
             className="bg-indigo-600 rounded-lg flex justify-center items-center h-12 max-w-56 text-white py-4 px-8 sm:text-md text-sm font-bold transition ease-in-out hover:bg-white duration-300 hover:border-2 hover:scale-105 border-indigo-600 hover:text-indigo-600"
-            href="https://bit.ly/sahilyeoleresume">
+            href="https://bit.ly/sahilyeoleresume-oct24">
             Download Resume
           </a>
         </div>

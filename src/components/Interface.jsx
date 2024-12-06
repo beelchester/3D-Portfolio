@@ -250,7 +250,9 @@ const ProjectsSection = () => {
                   {p.title}
                 </a>
                 <a href={p.links[0]} className="flex justify-center items-center w-[85%] transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300">
-                  <img src={p.img} />
+                  <img src={p.img}
+                    className={p.img.includes('kairos') || p.img.includes('protecjs') ? 'max-w-[55%]' : ''}
+                  />
                 </a>
                 <p className="sm:text-lg text-[15px] pb-4">
                   {p.desc}

@@ -223,6 +223,18 @@ const ProjectsSection = () => {
             </a>
           </div>
           <p className="mt-2 text-sm md:text-base">{project.desc}</p>
+          {project.tech?.length > 0 && (
+            <div className="mt-3 flex flex-wrap gap-2">
+              {project.tech.map((t) => (
+                <span
+                  key={t}
+                  className="rounded-full bg-indigo-600/15 border border-indigo-600/30 text-indigo-800 text-xs md:text-sm font-semibold px-3 py-1"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          )}
           <div className="mt-4 flex-1 min-h-0 flex items-center justify-center rounded-lg bg-indigo-900/10 p-3">
             <img
               src={project.img}

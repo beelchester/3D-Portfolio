@@ -320,7 +320,7 @@ const ContactSection = () => {
         <div className={`w-96 max-w-full flex justify-center items-center ${isMobile ? "mt-8 mb-8" : "mt-10"}`}>
           <a
             className="bg-indigo-600 rounded-lg flex justify-center items-center h-12 max-w-56 text-white py-4 px-8 sm:text-md text-sm font-bold transition ease-in-out hover:bg-white duration-300 hover:border-2 hover:scale-105 border-indigo-600 hover:text-indigo-600"
-            href="https://rxresu.me/sahilyeole/resume">
+            href="https://rxresu.me/sahilyeole/sde">
             Download Resume
           </a>
         </div>

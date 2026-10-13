@@ -1,11 +1,5 @@
 import { motion } from "framer-motion"
 import emailjs from "@emailjs/browser";
-import { Swiper, SwiperSlide } from "swiper/react";
-import 'swiper/css';
-import 'swiper/css/navigation';
-import { Navigation } from 'swiper/modules';
-import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
 import data from "../data.json";
 
 const { skills: Skills, experience: Experiences, projects: Projects } = data;
@@ -188,37 +182,58 @@ const ExperienceSection = () => {
 };
 
 const ProjectsSection = () => {
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const [active, setActive] = useState(0);
+  const project = Projects[active];
+  const portrait = project.img.includes("kairos") || project.img.includes("protecjs");
   return (
     <Section>
-      <h1 className="sm:text-6xl text-4xl pt-8 font-extrabold leading-snug">
+      <h1 className="sm:text-6xl text-4xl font-extrabold leading-snug">
         Projects
       </h1>
-      <div className="flex justify-center items-center sm:h-full h-3/4 w-full mt-12">
-        <Swiper loop={true} className="mySwiper" navigation={!isMobile} pagination={true} modules={[Navigation, Pagination]}>
-          {Projects.map((p) =>
-            <SwiperSlide key={p.title}>
-              <div className="text-white flex flex-col items-center h-full h-max-[1rem] justify-around p-2 py-5">
-                <a href={p.links[0]} className="sm:text-3xl text-2xl font-extrabold hover:underline">
-                  {p.title}
-                </a>
-                <a href={p.links[0]} className="flex justify-center items-center w-[85%] transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300">
-                  <img src={p.img}
-                    className={p.img.includes('kairos') || p.img.includes('protecjs') ? 'max-w-[55%]' : ''}
-                  />
-                </a>
-                <p className="sm:text-lg text-[15px] pb-4">
-                  {p.desc}
-                </p>
-              </div>
-            </SwiperSlide>
-          )}
-        </Swiper>
-      </div>
-
-    </Section >
-  )
-}
+      <motion.div
+        className="mt-6 w-full flex flex-col md:flex-row gap-4 md:gap-6"
+        initial={{ opacity: 0, y: 25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1 }}
+      >
+        <div className="flex md:flex-col gap-2 md:w-64 shrink-0 overflow-x-auto md:overflow-x-visible md:overflow-y-auto md:h-[62vh]">
+          {Projects.map((p, i) => (
+            <button
+              key={p.title}
+              onClick={() => setActive(i)}
+              className={`text-left rounded-lg px-4 py-2.5 font-bold transition-colors whitespace-nowrap border-l-4 ${i === active
+                ? "bg-indigo-600 text-white border-indigo-900"
+                : "bg-white/40 text-indigo-900 border-transparent hover:bg-white/70"
+                }`}
+            >
+              {p.title}
+            </button>
+          ))}
+        </div>
+        <div className="flex-1 rounded-lg bg-white/50 backdrop-blur-sm border border-indigo-200 p-5 sm:p-6 text-indigo-900 h-[45vh] md:h-[62vh] flex flex-col">
+          <div className="flex items-center justify-between gap-4">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-indigo-700">
+              {project.title}
+            </h2>
+            <a
+              href={project.links[0]}
+              className="shrink-0 rounded-lg bg-indigo-600 text-white text-sm font-bold px-4 py-2 hover:bg-indigo-700 transition-colors"
+            >
+              View on GitHub
+            </a>
+          </div>
+          <p className="mt-2 text-sm md:text-base">{project.desc}</p>
+          <div className="mt-4 flex-1 min-h-0 flex items-center justify-center rounded-lg bg-indigo-900/10 p-3">
+            <img
+              src={project.img}
+              className={`max-h-full object-contain rounded-md ${portrait ? "max-w-[40%]" : "max-w-full"}`}
+            />
+          </div>
+        </div>
+      </motion.div>
+    </Section>
+  );
+};
 const ContactSection = () => {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const form = useRef(null);

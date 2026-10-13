@@ -30,7 +30,7 @@ export const Interface = ({ setSection }) => {
 const Section = ({ children }) => {
   return (
     <motion.section
-      className="h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col justify-center items-start"
+      className="h-screen w-screen p-5 sm:p-8 max-w-screen-2xl mx-auto flex flex-col justify-center items-start"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 0.6 } }}
     >
@@ -48,7 +48,7 @@ const AboutSection = ({ setSection }) => {
         <span className="bg-white px-1 italic">Sahil Yeole</span>
       </h1>
       <motion.p
-        className="sm:text-lg text-[14px] text-gray-600 mt-4"
+        className="sm:text-lg text-[14px] text-gray-600 mt-4 max-w-[62%] sm:max-w-none"
         initial={{
           opacity: 0,
           y: 25,
@@ -63,8 +63,8 @@ const AboutSection = ({ setSection }) => {
         }}
       >
         I write Rust, chase performance bugs,
-        <br />
-        and occasionally build compilers for Morse code.
+        <br className="hidden sm:block" />
+        {" "}and occasionally build compilers for Morse code.
       </motion.p>
       <div
         className="flex flex-col">
@@ -127,14 +127,13 @@ const TechPills = ({ tech, className = "mt-3" }) => {
 
 const ExperienceSection = () => {
   const [active, setActive] = useState(0);
-  const job = Experiences[active];
   return (
     <Section>
-      <h1 className="sm:text-6xl text-4xl font-extrabold leading-snug">
+      <h1 className="sm:text-6xl text-3xl font-extrabold leading-snug">
         Skills
       </h1>
       <motion.div
-        className="mt-4 flex flex-col gap-2 w-full max-w-3xl"
+        className="mt-2 sm:mt-4 flex flex-col gap-1.5 sm:gap-2 w-full max-w-3xl"
         initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1 }}
@@ -142,14 +141,14 @@ const ExperienceSection = () => {
         {Skills.map(({ category, items }) => (
           <div
             key={category}
-            className="rounded-lg border-l-4 border-indigo-600 bg-white/40 backdrop-blur-sm px-3 py-2 text-indigo-900 text-xs md:text-base"
+            className="rounded-lg border-l-4 border-indigo-600 bg-white/40 backdrop-blur-sm px-3 py-1.5 sm:py-2 text-indigo-900 text-[11px] leading-snug sm:text-xs md:text-base"
           >
             <strong>{category}:</strong> {items.join(", ")}
           </div>
         ))}
       </motion.div>
       <motion.h1
-        className="sm:text-6xl text-4xl font-extrabold leading-snug mt-[6vh]"
+        className="sm:text-6xl text-3xl font-extrabold leading-snug mt-[3vh] sm:mt-[6vh]"
         initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1.5 }}
@@ -157,17 +156,17 @@ const ExperienceSection = () => {
         Experience
       </motion.h1>
       <motion.div
-        className="mt-4 w-full flex flex-col md:flex-row gap-4 md:gap-6"
+        className="mt-2 sm:mt-4 w-full flex flex-col md:flex-row gap-3 md:gap-6"
         initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 2 }}
       >
-        <div className="flex md:flex-col gap-2 md:w-56 shrink-0 overflow-x-auto">
+        <div className="flex md:flex-col gap-2 md:w-56 shrink-0 overflow-x-auto no-scrollbar">
           {Experiences.map((e, i) => (
             <button
               key={e.company}
               onClick={() => setActive(i)}
-              className={`text-left rounded-lg px-4 py-3 font-bold transition-colors whitespace-nowrap border-l-4 ${i === active
+              className={`text-left rounded-lg px-4 py-2 md:py-3 text-sm md:text-base font-bold transition-colors whitespace-nowrap border-l-4 ${i === active
                 ? "bg-indigo-600 text-white border-indigo-900"
                 : "bg-white/40 text-indigo-900 border-transparent hover:bg-white/70"
                 }`}
@@ -176,28 +175,38 @@ const ExperienceSection = () => {
             </button>
           ))}
         </div>
-        <div className="flex-1 rounded-lg bg-white/50 backdrop-blur-sm border border-indigo-200 p-5 sm:p-6 text-indigo-900 h-[24rem] overflow-y-auto ">
-          {job.link ? (
-            <a
-              href={job.link}
-              className="text-2xl sm:text-3xl font-extrabold text-indigo-700 hover:underline"
-            >
-              {job.company}
-            </a>
-          ) : (
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-indigo-700">
-              {job.company}
-            </h2>
-          )}
-          <p className="font-bold mt-1">{job.role}</p>
-          <p className="text-sm text-indigo-700">{job.period}</p>
-          {job.summary && <p className="pt-3 text-sm md:text-base">{job.summary}</p>}
-          <ul className="mt-3 space-y-1.5 text-sm md:text-base list-disc pl-5 marker:text-indigo-600">
-            {job.points.map((pt) => (
-              <li key={pt}>{pt}</li>
+        <div className="w-full md:w-auto md:flex-1 self-start rounded-lg bg-white/50 backdrop-blur-sm border border-indigo-200 p-4 sm:p-6 text-indigo-900 min-w-0 h-[34vh] sm:h-auto sm:max-h-[50vh] overflow-y-auto">
+          <div className="grid">
+            {Experiences.map((job, i) => (
+              <div
+                key={job.company}
+                className={`col-start-1 row-start-1 ${i === active ? "" : "invisible"}`}
+                aria-hidden={i !== active}
+              >
+                {job.link ? (
+                  <a
+                    href={job.link}
+                    className="text-2xl sm:text-3xl font-extrabold text-indigo-700 hover:underline"
+                  >
+                    {job.company}
+                  </a>
+                ) : (
+                  <h2 className="text-2xl sm:text-3xl font-extrabold text-indigo-700">
+                    {job.company}
+                  </h2>
+                )}
+                <p className="font-bold mt-1">{job.role}</p>
+                <p className="text-sm text-indigo-700">{job.period}</p>
+                {job.summary && <p className="pt-3 text-sm md:text-base">{job.summary}</p>}
+                <ul className="mt-3 space-y-1.5 text-sm md:text-base list-disc pl-5 marker:text-indigo-600">
+                  {job.points.map((pt) => (
+                    <li key={pt}>{pt}</li>
+                  ))}
+                </ul>
+                <TechPills tech={job.tech} className="mt-6" />
+              </div>
             ))}
-          </ul>
-          <TechPills tech={job.tech} className="mt-6" />
+          </div>
         </div>
       </motion.div>
     </Section>
@@ -210,7 +219,7 @@ const ProjectsSection = () => {
   const portrait = project.img.includes("kairos") || project.img.includes("protecjs");
   return (
     <Section>
-      <h1 className="sm:text-6xl text-4xl font-extrabold leading-snug">
+      <h1 className="sm:text-6xl text-3xl font-extrabold leading-snug">
         Projects
       </h1>
       <motion.div
@@ -219,12 +228,12 @@ const ProjectsSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1 }}
       >
-        <div className="flex md:flex-col gap-2 md:w-64 shrink-0 overflow-x-auto md:overflow-x-visible md:overflow-y-auto md:h-[62vh]">
+        <div className="flex md:flex-col gap-2 md:w-64 shrink-0 overflow-x-auto md:overflow-x-visible md:overflow-y-auto md:h-[62vh] no-scrollbar">
           {Projects.map((p, i) => (
             <button
               key={p.title}
               onClick={() => setActive(i)}
-              className={`text-left rounded-lg px-4 py-2.5 font-bold transition-colors whitespace-nowrap border-l-4 ${i === active
+              className={`text-left rounded-lg px-4 py-2 md:py-2.5 text-sm md:text-base font-bold transition-colors whitespace-nowrap border-l-4 ${i === active
                 ? "bg-indigo-600 text-white border-indigo-900"
                 : "bg-white/40 text-indigo-900 border-transparent hover:bg-white/70"
                 }`}
@@ -233,14 +242,14 @@ const ProjectsSection = () => {
             </button>
           ))}
         </div>
-        <div className="flex-1 rounded-lg bg-white/50 backdrop-blur-sm border border-indigo-200 p-5 sm:p-6 text-indigo-900 h-[45vh] md:h-[62vh] flex flex-col">
-          <div className="flex items-center justify-between gap-4">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-indigo-700">
+        <div className="w-full md:w-auto md:flex-1 rounded-lg bg-white/50 backdrop-blur-sm border border-indigo-200 p-4 sm:p-6 text-indigo-900 min-w-0 h-[55vh] md:h-[62vh] flex flex-col">
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="text-xl sm:text-3xl font-extrabold text-indigo-700 min-w-0 break-words">
               {project.title}
             </h2>
             <a
               href={project.links[0]}
-              className="shrink-0 rounded-lg bg-indigo-600 text-white text-sm font-bold px-4 py-2 hover:bg-indigo-700 transition-colors"
+              className="shrink-0 rounded-lg bg-indigo-600 text-white text-xs sm:text-sm font-bold px-3 sm:px-4 py-2 hover:bg-indigo-700 transition-colors"
             >
               View on GitHub
             </a>
@@ -282,9 +291,9 @@ const ContactSection = () => {
 
   return (
     <Section>
-      <h2 className="sm:text-6xl text-4xl font-bold">Contact me</h2>
+      <h2 className="sm:text-6xl text-3xl font-bold mt-12 sm:mt-0">Contact me</h2>
       <div className="flex w-full sm:items-start items-center flex-col">
-        <div className="mt-8 sm:mt-16 sm:p-8 p-4 rounded-md bg-white sm:w-96 w-[90%] min-w-64 max-w-full">
+        <div className="mt-4 sm:mt-16 sm:p-8 p-4 rounded-md bg-white sm:w-96 w-[90%] min-w-64 max-w-full">
           <form
             ref={form}
             onSubmit={sendEmail}
@@ -301,7 +310,7 @@ const ContactSection = () => {
             />
             <label
               for="from_email"
-              className="font-medium text-gray-900 block mb-1 sm:mt-8 mt-4"
+              className="font-medium text-gray-900 block mb-1 sm:mt-8 mt-3"
             >
               Email
             </label>
@@ -314,22 +323,22 @@ const ContactSection = () => {
             />
             <label
               for="email"
-              className="font-medium text-gray-900 block mb-1 sm:mt-8 mt-4"
+              className="font-medium text-gray-900 block mb-1 sm:mt-8 mt-3"
             >
               Message
             </label>
             <textarea
               name="message"
               id="message"
-              className="h-32 block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 p-3"
+              className="h-20 sm:h-32 block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 p-3"
               required={true}
             />
-            <button className="bg-indigo-600 text-white py-4 px-8 rounded-lg font-bold sm:text-lg text-sm sm:mt-16 mt-8 ">
+            <button className="bg-indigo-600 text-white py-3 sm:py-4 px-8 rounded-lg font-bold sm:text-lg text-sm sm:mt-16 mt-4 ">
               Submit
             </button>
           </form>
         </div>
-        <div className={`w-96 max-w-full flex justify-center items-center ${isMobile ? "mt-8 mb-8" : "mt-10"}`}>
+        <div className={`w-96 max-w-full flex justify-center items-center ${isMobile ? "mt-4 mb-4" : "mt-10"}`}>
           <a
             className="bg-indigo-600 rounded-lg flex justify-center items-center h-12 max-w-56 text-white py-4 px-8 sm:text-md text-sm font-bold transition ease-in-out hover:bg-white duration-300 hover:border-2 hover:scale-105 border-indigo-600 hover:text-indigo-600"
             href="https://rxresu.me/sahilyeole/sdep">

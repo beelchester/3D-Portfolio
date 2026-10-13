@@ -75,3 +75,11 @@ body {
 .swiper-pagination-bullet-active {
   background-color: white;
 }
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

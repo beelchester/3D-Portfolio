@@ -6,7 +6,9 @@ import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
-import { Projects, Experiences } from "../content";
+import data from "../data.json";
+
+const { skills: Skills, experience: Experiences, projects: Projects } = data;
 import { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -113,12 +115,6 @@ const AboutSection = ({ setSection }) => {
   );
 };
 
-const skillGroups = [
-  ["Programming languages", "TypeScript, Rust, Go, Python, C, Dart"],
-  ["Front-End Tech", "NextJS, React, React Native, Flutter, Redux, TailwindCSS"],
-  ["Back-End Tech", "Node, Express, Prisma, GraphQL, Actix, Gin, MongoDB, PostgreSQL"],
-];
-
 const ExperienceSection = () => {
   const [active, setActive] = useState(0);
   const job = Experiences[active];
@@ -133,12 +129,12 @@ const ExperienceSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1 }}
       >
-        {skillGroups.map(([label, items]) => (
+        {Skills.map(({ category, items }) => (
           <div
-            key={label}
+            key={category}
             className="rounded-lg border-l-4 border-indigo-600 bg-white/40 backdrop-blur-sm px-3 py-2 text-indigo-900 text-xs md:text-base"
           >
-            <strong>{label}:</strong> {items}
+            <strong>{category}:</strong> {items.join(", ")}
           </div>
         ))}
       </motion.div>

@@ -6,7 +6,7 @@ import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
-import { Projects } from "../content";
+import { Projects, Experiences } from "../content";
 import { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -113,123 +113,80 @@ const AboutSection = ({ setSection }) => {
   );
 };
 
-const ExperienceSection = () => {
+const skillGroups = [
+  ["Programming languages", "TypeScript, Rust, Go, Python, C, Dart"],
+  ["Front-End Tech", "NextJS, React, React Native, Flutter, Redux, TailwindCSS"],
+  ["Back-End Tech", "Node, Express, Prisma, GraphQL, Actix, Gin, MongoDB, PostgreSQL"],
+];
 
+const ExperienceSection = () => {
+  const [active, setActive] = useState(0);
+  const job = Experiences[active];
   return (
     <Section>
       <h1 className="sm:text-6xl text-4xl font-extrabold leading-snug">
         Skills
       </h1>
-      <motion.p
-        className="md:text-lg text-sm text-indigo-900 mt-4"
-        initial={{
-          opacity: 0,
-          y: 25,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-        }}
-        transition={{
-          duration: 1,
-          delay: 1,
-        }}
+      <motion.div
+        className="mt-4 flex flex-col gap-2 w-full max-w-3xl"
+        initial={{ opacity: 0, y: 25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1 }}
       >
-        <strong>Programming languages:</strong> TypeScript, Rust, Go, Python, C, Dart
-        <br />
-        <strong>Front-End Tech:</strong> NextJS, React, React Native, Flutter, Redux, TailwindCSS
-        <br />
-        <strong>Back-End Tech:</strong> Node, Express, Prisma, GraphQL, Actix, Gin, MongoDB, PostgreSQL
-        <br />
-        <strong>DevOps:</strong> Docker, CI/CD, GitHub Actions
-        <br />
-      </motion.p>
+        {skillGroups.map(([label, items]) => (
+          <div
+            key={label}
+            className="rounded-lg border-l-4 border-indigo-600 bg-white/40 backdrop-blur-sm px-3 py-2 text-indigo-900 text-xs md:text-base"
+          >
+            <strong>{label}:</strong> {items}
+          </div>
+        ))}
+      </motion.div>
       <motion.h1
-        initial={{
-          opacity: 0,
-          y: 25,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-        }}
-        transition={{
-          duration: 1,
-          delay: 1.5,
-        }}
-        className="sm:text-6xl text-4xl font-extrabold leading-snug pt-8">
+        className="sm:text-6xl text-4xl font-extrabold leading-snug mt-[6vh]"
+        initial={{ opacity: 0, y: 25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1.5 }}
+      >
         Experience
       </motion.h1>
-      <motion.p
-        className="text-sm md:text-lg text-indigo-900 mt-4 h-[50%]"
-        initial={{
-          opacity: 0,
-          y: 25,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-        }}
-        transition={{
-          duration: 1,
-          delay: 2,
-        }}
+      <motion.div
+        className="mt-4 w-full flex flex-col md:flex-row gap-4 md:gap-6"
+        initial={{ opacity: 0, y: 25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 2 }}
       >
-        <div className="bg-white bg-opacity-90 rounded-lg p-4 shadow-md h-[50%] overflow-scroll">
-          <a href="https://github.com/tailcallhq"
-            className="text-2xl font-extrabold underline hover:cursor-pointer">
-            Tailcall
-          </a>
-          <p className="font-bold">SDE Intern</p>
-          <p className="">July 2024 - September 2024</p>
-
-          <p className="pt-3">
-            Tailcall is an emerging open-source Rust project that provides easy orchestration to build high-performance GraphQL backends.
-
-            <br />
-            • Enhanced the implementation of GraphQL benchmarks for comparing the performance of various GraphQL frameworks, resulting in more accurate and diverse benchmark cases.
-            <br />
-            • Developed and integrated Grafana K6 testing with InfluxDB for storage, utilizing Grafana visualizations to generate automated performance graphs.
-            <br />
-            • Optimized the utilization of LLMs to enhance Tailcall’s schema generation capabilities.
-            <br />
-            • Implemented a feature to support custom headers for gRPC reflection server requests.
-            <br />
-            • Developed a reliable workflow for automating the publication of blogs to external platforms.
-            <br />
-          </p>
-
+        <div className="flex md:flex-col gap-2 md:w-56 shrink-0 overflow-x-auto">
+          {Experiences.map((e, i) => (
+            <button
+              key={e.company}
+              onClick={() => setActive(i)}
+              className={`text-left rounded-lg px-4 py-3 font-bold transition-colors whitespace-nowrap border-l-4 ${i === active
+                ? "bg-indigo-600 text-white border-indigo-900"
+                : "bg-white/40 text-indigo-900 border-transparent hover:bg-white/70"
+                }`}
+            >
+              {e.company}
+            </button>
+          ))}
         </div>
-        <div className="bg-white bg-opacity-90 rounded-lg p-4 shadow-md mt-4 h-[50%] overflow-scroll">
-          <a href="https://github.com/rustdesk/rustdesk/pulls?q=is:pr+author:beelchester"
-            className="text-2xl font-extrabold underline hover:cursor-pointer">
-            RustDesk
+        <div className="flex-1 rounded-lg bg-white/50 backdrop-blur-sm border border-indigo-200 p-5 sm:p-6 text-indigo-900 h-[24rem] overflow-y-auto ">
+          <a
+            href={job.link}
+            className="text-2xl sm:text-3xl font-extrabold text-indigo-700 hover:underline"
+          >
+            {job.company}
           </a>
-          <p className="font-bold">SDE Intern</p>
-          <p className="">August 2023 - January 2024</p>
-
-          <p className="pt-3">
-            Rustdesk, ranked among the top 4 Rust projects on GitHub and funded by OSS Capital, is an open-source remote desktop software developed in Rust and Flutter.
-
-            <br />
-            • Fixed over 30 bugs, enhancing software stability and user experience.
-
-            <br />
-            • Implemented multiple features, prioritizing improvements for Wayland Linux and Windows support and UI enhancements.
-
-            <br />
-            • Introduced a scam alert feature, leading to a reduction in fraudulent activities.
-
-            <br />
-            • Continued involvement post-internship by collaborating on a funded feature for Auto Display Switch upon cursor/window switch during remote sessions.
-
-            <br />
-            • Played a key role in the project’s growth, contributing to a substantial increase in GitHub stars from 40k to 65k.
-            <br />
-          </p>
-
+          <p className="font-bold mt-1">{job.role}</p>
+          <p className="text-sm text-indigo-700">{job.period}</p>
+          <p className="pt-3 text-sm md:text-base">{job.summary}</p>
+          <ul className="mt-3 space-y-1.5 text-sm md:text-base list-disc pl-5 marker:text-indigo-600">
+            {job.points.map((pt) => (
+              <li key={pt}>{pt}</li>
+            ))}
+          </ul>
         </div>
-      </motion.p>
+      </motion.div>
     </Section>
   );
 };

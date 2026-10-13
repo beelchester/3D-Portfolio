@@ -54,3 +54,34 @@ export const Projects = [
                                 links: ["https://github.com/beelchester/cryptocurrency-tracker"]
                 },
 ]
+
+export const Experiences = [
+        {
+                company: "Tailcall",
+                link: "https://github.com/tailcallhq",
+                role: "SDE Intern",
+                period: "July 2024 - September 2024",
+                summary: "Tailcall is an emerging open-source Rust project that provides easy orchestration to build high-performance GraphQL backends.",
+                points: [
+                        "Enhanced the implementation of GraphQL benchmarks for comparing the performance of various GraphQL frameworks, resulting in more accurate and diverse benchmark cases.",
+                        "Developed and integrated Grafana K6 testing with InfluxDB for storage, utilizing Grafana visualizations to generate automated performance graphs.",
+                        "Optimized the utilization of LLMs to enhance Tailcall’s schema generation capabilities.",
+                        "Implemented a feature to support custom headers for gRPC reflection server requests.",
+                        "Developed a reliable workflow for automating the publication of blogs to external platforms.",
+                ],
+        },
+        {
+                company: "RustDesk",
+                link: "https://github.com/rustdesk/rustdesk/pulls?q=is:pr+author:beelchester",
+                role: "SDE Intern",
+                period: "August 2023 - January 2024",
+                summary: "Rustdesk, ranked among the top 4 Rust projects on GitHub and funded by OSS Capital, is an open-source remote desktop software developed in Rust and Flutter.",
+                points: [
+                        "Fixed over 30 bugs, enhancing software stability and user experience.",
+                        "Implemented multiple features, prioritizing improvements for Wayland Linux and Windows support and UI enhancements.",
+                        "Introduced a scam alert feature, leading to a reduction in fraudulent activities.",
+                        "Continued involvement post-internship by collaborating on a funded feature for Auto Display Switch upon cursor/window switch during remote sessions.",
+                        "Played a key role in the project’s growth, contributing to a substantial increase in GitHub stars from 40k to 65k.",
+                ],
+        },
+]

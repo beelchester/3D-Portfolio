@@ -62,9 +62,9 @@ const AboutSection = ({ setSection }) => {
           delay: 1.5,
         }}
       >
-        I'm a full-stack developer passionate about
+        I write Rust, chase performance bugs,
         <br />
-        making software world a better place.
+        and occasionally build compilers for Morse code.
       </motion.p>
       <div
         className="flex flex-col">
@@ -106,6 +106,22 @@ const AboutSection = ({ setSection }) => {
         </motion.div>
       </div>
     </Section>
+  );
+};
+
+const TechPills = ({ tech, className = "mt-3" }) => {
+  if (!tech?.length) return null;
+  return (
+    <div className={`${className} flex flex-wrap gap-2`}>
+      {tech.map((t) => (
+        <span
+          key={t}
+          className="rounded-full bg-indigo-600/15 border border-indigo-600/30 text-indigo-800 text-xs md:text-sm font-semibold px-3 py-1"
+        >
+          {t}
+        </span>
+      ))}
+    </div>
   );
 };
 
@@ -161,20 +177,27 @@ const ExperienceSection = () => {
           ))}
         </div>
         <div className="flex-1 rounded-lg bg-white/50 backdrop-blur-sm border border-indigo-200 p-5 sm:p-6 text-indigo-900 h-[24rem] overflow-y-auto ">
-          <a
-            href={job.link}
-            className="text-2xl sm:text-3xl font-extrabold text-indigo-700 hover:underline"
-          >
-            {job.company}
-          </a>
+          {job.link ? (
+            <a
+              href={job.link}
+              className="text-2xl sm:text-3xl font-extrabold text-indigo-700 hover:underline"
+            >
+              {job.company}
+            </a>
+          ) : (
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-indigo-700">
+              {job.company}
+            </h2>
+          )}
           <p className="font-bold mt-1">{job.role}</p>
           <p className="text-sm text-indigo-700">{job.period}</p>
-          <p className="pt-3 text-sm md:text-base">{job.summary}</p>
+          {job.summary && <p className="pt-3 text-sm md:text-base">{job.summary}</p>}
           <ul className="mt-3 space-y-1.5 text-sm md:text-base list-disc pl-5 marker:text-indigo-600">
             {job.points.map((pt) => (
               <li key={pt}>{pt}</li>
             ))}
           </ul>
+          <TechPills tech={job.tech} className="mt-6" />
         </div>
       </motion.div>
     </Section>
@@ -223,18 +246,7 @@ const ProjectsSection = () => {
             </a>
           </div>
           <p className="mt-2 text-sm md:text-base">{project.desc}</p>
-          {project.tech?.length > 0 && (
-            <div className="mt-3 flex flex-wrap gap-2">
-              {project.tech.map((t) => (
-                <span
-                  key={t}
-                  className="rounded-full bg-indigo-600/15 border border-indigo-600/30 text-indigo-800 text-xs md:text-sm font-semibold px-3 py-1"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-          )}
+          <TechPills tech={project.tech} />
           <div className="mt-4 flex-1 min-h-0 flex items-center justify-center rounded-lg bg-indigo-900/10 p-3">
             <img
               src={project.img}

@@ -3,70 +3,176 @@
     {
       "category": "Programming languages",
       "items": [
-        "TypeScript",
         "Rust",
         "Go",
-        "Python",
+        "TypeScript",
         "C",
-        "Dart"
+        "Python",
+        "Dart",
+        "Lua",
+        "SQL"
       ]
     },
     {
       "category": "Front-End Tech",
       "items": [
+        "Tauri",
+        "Egui",
+        "Slint",
+        "Flutter",
         "NextJS",
         "React",
         "React Native",
-        "Flutter",
-        "Redux",
         "TailwindCSS"
       ]
     },
     {
       "category": "Back-End Tech",
       "items": [
-        "Node",
-        "Express",
-        "Prisma",
-        "GraphQL",
         "Actix",
-        "Gin",
+        "Axum",
+        "SQLite",
         "MongoDB",
-        "PostgreSQL"
+        "PostgreSQL",
+        "Redis",
+        "Node",
+        "GraphQL",
+        "WebRTC"
+      ]
+    },
+    {
+      "category": "Misc",
+      "items": [
+        "Tokio",
+        "Wgpu",
+        "Wasm",
+        "Datafusion",
+        "Grafana",
+        "FFmpeg",
+        "CI/CD",
+        "Linux",
+        "Vim"
       ]
     }
   ],
   "experience": [
     {
+      "company": "AfterShoot",
+      "link": "https://getphoton.com",
+      "role": "Software Engineer",
+      "period": "Jun 2025 – Present",
+      "summary": "AfterShoot is photo editing software with features such as culling, advanced editing, presets, and an AI coach for assisted editing.",
+      "points": [
+        "Played a key role in developing the new product “Photon” from scratch through its first release.",
+        "Worked extensively on core functionality, including the import/export pipeline, image processing, rendering, filtering, metadata, and all database handling.",
+        "Optimized grid rendering on slow I/O devices, making it 7× faster.",
+        "Wrote an internal tool for parsing and writing XMP metadata, both in sidecar files and embedded within image files such as JPEG."
+      ],
+      "tech": [
+        "Rust",
+        "Wgpu",
+        "SQLite",
+        "Axum",
+        "Egui",
+        "Slint"
+      ]
+    },
+    {
+      "company": "Helmer",
+      "link": "https://github.com/helmerapp",
+      "role": "Software Engineer Intern",
+      "period": "Dec 2024 – Jun 2025",
+      "summary": "Helmer is a video, audio, and screen capture application with built-in video editing and project management.",
+      "points": [
+        "Engineered a reliable backend encoder and decoder system in Rust using OS APIs, powering video and audio capturing and recording.",
+        "Delivered over 30 features and fixes, enhancing multi-platform support and overall application reliability.",
+        "Built an audio enhancement pipeline using an AI service."
+      ],
+      "tech": [
+        "Rust",
+        "TypeScript",
+        "Tauri",
+        "Astro",
+        "FFmpeg"
+      ]
+    },
+    {
       "company": "Tailcall",
       "link": "https://github.com/tailcallhq",
-      "role": "SDE Intern",
-      "period": "July 2024 - September 2024",
-      "summary": "Tailcall is an emerging open-source Rust project that provides easy orchestration to build high-performance GraphQL backends.",
+      "role": "Software Engineer Intern",
+      "period": "Jul 2024 – Sep 2024",
+      "summary": "Tailcall is an open-source Rust project that provides easy orchestration to build high-performance GraphQL backends.",
       "points": [
         "Enhanced the implementation of GraphQL benchmarks for comparing the performance of various GraphQL frameworks, resulting in more accurate and diverse benchmark cases.",
         "Developed and integrated Grafana K6 testing with InfluxDB for storage, utilizing Grafana visualizations to generate automated performance graphs.",
-        "Optimized the utilization of LLMs to enhance Tailcall’s schema generation capabilities.",
-        "Implemented a feature to support custom headers for gRPC reflection server requests.",
-        "Developed a reliable workflow for automating the publication of blogs to external platforms."
+        "Implemented a feature to support custom headers for gRPC reflection server requests."
+      ],
+      "tech": [
+        "Rust",
+        "TypeScript",
+        "GraphQL",
+        "Go"
       ]
     },
     {
       "company": "RustDesk",
       "link": "https://github.com/rustdesk/rustdesk/pulls?q=is:pr+author:beelchester",
-      "role": "SDE Intern",
-      "period": "August 2023 - January 2024",
-      "summary": "Rustdesk, ranked among the top 4 Rust projects on GitHub and funded by OSS Capital, is an open-source remote desktop software developed in Rust and Flutter.",
+      "role": "Software Engineer Intern",
+      "period": "Aug 2023 – Jan 2024",
+      "summary": "RustDesk, ranked among the top 5 Rust projects on GitHub, is open-source remote desktop software developed in Rust and Flutter.",
       "points": [
         "Fixed over 30 bugs, enhancing software stability and user experience.",
         "Implemented multiple features, prioritizing improvements for Wayland Linux and Windows support and UI enhancements.",
-        "Introduced a scam alert feature, leading to a reduction in fraudulent activities.",
-        "Continued involvement post-internship by collaborating on a funded feature for Auto Display Switch upon cursor/window switch during remote sessions.",
-        "Played a key role in the project’s growth, contributing to a substantial increase in GitHub stars from 40k to 65k."
+        "Continued involvement post-internship by collaborating on a funded feature for Auto Display Switch upon cursor/window switch during remote sessions."
+      ],
+      "tech": [
+        "Rust",
+        "Flutter",
+        "Linux"
       ]
     }
   ],
   "projects": [
+    {
+      "title": "P2Pong",
+      "desc": "Multiplayer (peer-to-peer) ping pong game.",
+      "tech": [
+        "Rust",
+        "Wasm",
+        "Wgpu",
+        "WebRTC"
+      ],
+      "img": "images/p2pong.png",
+      "links": [
+        "https://github.com/beelchester/p2pong"
+      ]
+    },
+    {
+      "title": "Igris",
+      "desc": "Mini observability tool supporting logs, traces, and metrics.",
+      "tech": [
+        "Rust",
+        "Datafusion",
+        "Arrow",
+        "Parquet"
+      ],
+      "img": "images/igris.png",
+      "links": [
+        "https://github.com/beelchester/igris"
+      ]
+    },
+    {
+      "title": "Morselang",
+      "desc": "Compiled programming language using Morse syntax, with hand-written RISC-V (riscv64) codegen.",
+      "tech": [
+        "Rust",
+        "Assembly"
+      ],
+      "img": "images/morselang.png",
+      "links": [
+        "https://github.com/beelchester/morselang"
+      ]
+    },
     {
       "title": "Kairos",
       "desc": "A multiplatform productivity app built in Flutter and Rust.",
@@ -80,18 +186,11 @@
       ]
     },
     {
-      "title": "ProtecJS",
-      "desc": "A frontend library that orchestrates crucial security practices to defend against client-side attacks.",
-      "tech": [],
-      "img": "images/protecjs.png",
-      "links": [
-        "https://github.com/beelchester/protecjs"
-      ]
-    },
-    {
       "title": "Bittorrust",
-      "desc": "BitTorrent CLI Client in Rust, following BitTorrent's official protocol.",
-      "tech": [],
+      "desc": "BitTorrent CLI client in Rust, following BitTorrent's official protocol.",
+      "tech": [
+        "Rust"
+      ],
       "img": "images/bittorrust.png",
       "links": [
         "https://github.com/beelchester/bittorrust"
@@ -99,17 +198,35 @@
     },
     {
       "title": "ZenDB",
-      "desc": "Lightweight in-memory database server with support for Redis clients.",
-      "tech": [],
+      "desc": "Redis protocol compatible lightweight and concurrent in-memory database server.",
+      "tech": [
+        "Go",
+        "Redis"
+      ],
       "img": "images/zendb.png",
       "links": [
         "https://github.com/beelchester/zendb"
       ]
     },
     {
+      "title": "ProtecJS",
+      "desc": "A React library that applies common client-side security protections against attacks like XSS.",
+      "tech": [
+        "React"
+      ],
+      "img": "images/protecjs.png",
+      "links": [
+        "https://github.com/beelchester/protecjs"
+      ]
+    },
+    {
       "title": "DreamStay",
-      "desc": "A property rental dummy platform.",
-      "tech": [],
+      "desc": "A demo property rental platform.",
+      "tech": [
+        "NextJS",
+        "PostgreSQL",
+        "Prisma"
+      ],
       "img": "images/dreamstay.png",
       "links": [
         "https://github.com/beelchester/dreamstay"
@@ -118,7 +235,12 @@
     {
       "title": "TaskMaster",
       "desc": "A multiplatform To-Do manager app.",
-      "tech": [],
+      "tech": [
+        "React",
+        "React Native",
+        "PostgreSQL",
+        "Express"
+      ],
       "img": "images/taskmaster.png",
       "links": [
         "https://github.com/beelchester/taskmaster"
@@ -126,8 +248,10 @@
     },
     {
       "title": "Cryptocurrency Tracker",
-      "desc": "App to track latest values of cryptocurrencies.",
-      "tech": [],
+      "desc": "App to track the latest cryptocurrency prices.",
+      "tech": [
+        "React"
+      ],
       "img": "images/crtracker.png",
       "links": [
         "https://github.com/beelchester/cryptocurrency-tracker"

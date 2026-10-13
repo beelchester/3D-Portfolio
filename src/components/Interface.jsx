@@ -1,12 +1,8 @@
 import { motion } from "framer-motion"
 import emailjs from "@emailjs/browser";
-import { Swiper, SwiperSlide } from "swiper/react";
-import 'swiper/css';
-import 'swiper/css/navigation';
-import { Navigation } from 'swiper/modules';
-import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
-import { Projects } from "../content";
+import data from "../data.json";
+
+const { skills: Skills, experience: Experiences, projects: Projects } = data;
 import { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -114,158 +110,142 @@ const AboutSection = ({ setSection }) => {
 };
 
 const ExperienceSection = () => {
-
+  const [active, setActive] = useState(0);
+  const job = Experiences[active];
   return (
     <Section>
       <h1 className="sm:text-6xl text-4xl font-extrabold leading-snug">
         Skills
       </h1>
-      <motion.p
-        className="md:text-lg text-sm text-indigo-900 mt-4"
-        initial={{
-          opacity: 0,
-          y: 25,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-        }}
-        transition={{
-          duration: 1,
-          delay: 1,
-        }}
+      <motion.div
+        className="mt-4 flex flex-col gap-2 w-full max-w-3xl"
+        initial={{ opacity: 0, y: 25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1 }}
       >
-        <strong>Programming languages:</strong> TypeScript, Rust, Go, Python, C, Dart
-        <br />
-        <strong>Front-End Tech:</strong> NextJS, React, React Native, Flutter, Redux, TailwindCSS
-        <br />
-        <strong>Back-End Tech:</strong> Node, Express, Prisma, GraphQL, Actix, Gin, MongoDB, PostgreSQL
-        <br />
-        <strong>DevOps:</strong> Docker, CI/CD, GitHub Actions
-        <br />
-      </motion.p>
+        {Skills.map(({ category, items }) => (
+          <div
+            key={category}
+            className="rounded-lg border-l-4 border-indigo-600 bg-white/40 backdrop-blur-sm px-3 py-2 text-indigo-900 text-xs md:text-base"
+          >
+            <strong>{category}:</strong> {items.join(", ")}
+          </div>
+        ))}
+      </motion.div>
       <motion.h1
-        initial={{
-          opacity: 0,
-          y: 25,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-        }}
-        transition={{
-          duration: 1,
-          delay: 1.5,
-        }}
-        className="sm:text-6xl text-4xl font-extrabold leading-snug pt-8">
+        className="sm:text-6xl text-4xl font-extrabold leading-snug mt-[6vh]"
+        initial={{ opacity: 0, y: 25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1.5 }}
+      >
         Experience
       </motion.h1>
-      <motion.p
-        className="text-sm md:text-lg text-indigo-900 mt-4 h-[50%]"
-        initial={{
-          opacity: 0,
-          y: 25,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-        }}
-        transition={{
-          duration: 1,
-          delay: 2,
-        }}
+      <motion.div
+        className="mt-4 w-full flex flex-col md:flex-row gap-4 md:gap-6"
+        initial={{ opacity: 0, y: 25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 2 }}
       >
-        <div className="bg-white bg-opacity-90 rounded-lg p-4 shadow-md h-[50%] overflow-scroll">
-          <a href="https://github.com/tailcallhq"
-            className="text-2xl font-extrabold underline hover:cursor-pointer">
-            Tailcall
-          </a>
-          <p className="font-bold">SDE Intern</p>
-          <p className="">July 2024 - September 2024</p>
-
-          <p className="pt-3">
-            Tailcall is an emerging open-source Rust project that provides easy orchestration to build high-performance GraphQL backends.
-
-            <br />
-            • Enhanced the implementation of GraphQL benchmarks for comparing the performance of various GraphQL frameworks, resulting in more accurate and diverse benchmark cases.
-            <br />
-            • Developed and integrated Grafana K6 testing with InfluxDB for storage, utilizing Grafana visualizations to generate automated performance graphs.
-            <br />
-            • Optimized the utilization of LLMs to enhance Tailcall’s schema generation capabilities.
-            <br />
-            • Implemented a feature to support custom headers for gRPC reflection server requests.
-            <br />
-            • Developed a reliable workflow for automating the publication of blogs to external platforms.
-            <br />
-          </p>
-
+        <div className="flex md:flex-col gap-2 md:w-56 shrink-0 overflow-x-auto">
+          {Experiences.map((e, i) => (
+            <button
+              key={e.company}
+              onClick={() => setActive(i)}
+              className={`text-left rounded-lg px-4 py-3 font-bold transition-colors whitespace-nowrap border-l-4 ${i === active
+                ? "bg-indigo-600 text-white border-indigo-900"
+                : "bg-white/40 text-indigo-900 border-transparent hover:bg-white/70"
+                }`}
+            >
+              {e.company}
+            </button>
+          ))}
         </div>
-        <div className="bg-white bg-opacity-90 rounded-lg p-4 shadow-md mt-4 h-[50%] overflow-scroll">
-          <a href="https://github.com/rustdesk/rustdesk/pulls?q=is:pr+author:beelchester"
-            className="text-2xl font-extrabold underline hover:cursor-pointer">
-            RustDesk
+        <div className="flex-1 rounded-lg bg-white/50 backdrop-blur-sm border border-indigo-200 p-5 sm:p-6 text-indigo-900 h-[24rem] overflow-y-auto ">
+          <a
+            href={job.link}
+            className="text-2xl sm:text-3xl font-extrabold text-indigo-700 hover:underline"
+          >
+            {job.company}
           </a>
-          <p className="font-bold">SDE Intern</p>
-          <p className="">August 2023 - January 2024</p>
-
-          <p className="pt-3">
-            Rustdesk, ranked among the top 4 Rust projects on GitHub and funded by OSS Capital, is an open-source remote desktop software developed in Rust and Flutter.
-
-            <br />
-            • Fixed over 30 bugs, enhancing software stability and user experience.
-
-            <br />
-            • Implemented multiple features, prioritizing improvements for Wayland Linux and Windows support and UI enhancements.
-
-            <br />
-            • Introduced a scam alert feature, leading to a reduction in fraudulent activities.
-
-            <br />
-            • Continued involvement post-internship by collaborating on a funded feature for Auto Display Switch upon cursor/window switch during remote sessions.
-
-            <br />
-            • Played a key role in the project’s growth, contributing to a substantial increase in GitHub stars from 40k to 65k.
-            <br />
-          </p>
-
+          <p className="font-bold mt-1">{job.role}</p>
+          <p className="text-sm text-indigo-700">{job.period}</p>
+          <p className="pt-3 text-sm md:text-base">{job.summary}</p>
+          <ul className="mt-3 space-y-1.5 text-sm md:text-base list-disc pl-5 marker:text-indigo-600">
+            {job.points.map((pt) => (
+              <li key={pt}>{pt}</li>
+            ))}
+          </ul>
         </div>
-      </motion.p>
+      </motion.div>
     </Section>
   );
 };
 
 const ProjectsSection = () => {
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const [active, setActive] = useState(0);
+  const project = Projects[active];
+  const portrait = project.img.includes("kairos") || project.img.includes("protecjs");
   return (
     <Section>
-      <h1 className="sm:text-6xl text-4xl pt-8 font-extrabold leading-snug">
+      <h1 className="sm:text-6xl text-4xl font-extrabold leading-snug">
         Projects
       </h1>
-      <div className="flex justify-center items-center sm:h-full h-3/4 w-full mt-12">
-        <Swiper loop={true} className="mySwiper" navigation={!isMobile} pagination={true} modules={[Navigation, Pagination]}>
-          {Projects.map((p) =>
-            <SwiperSlide key={p.title}>
-              <div className="text-white flex flex-col items-center h-full h-max-[1rem] justify-around p-2 py-5">
-                <a href={p.links[0]} className="sm:text-3xl text-2xl font-extrabold hover:underline">
-                  {p.title}
-                </a>
-                <a href={p.links[0]} className="flex justify-center items-center w-[85%] transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300">
-                  <img src={p.img}
-                    className={p.img.includes('kairos') || p.img.includes('protecjs') ? 'max-w-[55%]' : ''}
-                  />
-                </a>
-                <p className="sm:text-lg text-[15px] pb-4">
-                  {p.desc}
-                </p>
-              </div>
-            </SwiperSlide>
+      <motion.div
+        className="mt-6 w-full flex flex-col md:flex-row gap-4 md:gap-6"
+        initial={{ opacity: 0, y: 25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1 }}
+      >
+        <div className="flex md:flex-col gap-2 md:w-64 shrink-0 overflow-x-auto md:overflow-x-visible md:overflow-y-auto md:h-[62vh]">
+          {Projects.map((p, i) => (
+            <button
+              key={p.title}
+              onClick={() => setActive(i)}
+              className={`text-left rounded-lg px-4 py-2.5 font-bold transition-colors whitespace-nowrap border-l-4 ${i === active
+                ? "bg-indigo-600 text-white border-indigo-900"
+                : "bg-white/40 text-indigo-900 border-transparent hover:bg-white/70"
+                }`}
+            >
+              {p.title}
+            </button>
+          ))}
+        </div>
+        <div className="flex-1 rounded-lg bg-white/50 backdrop-blur-sm border border-indigo-200 p-5 sm:p-6 text-indigo-900 h-[45vh] md:h-[62vh] flex flex-col">
+          <div className="flex items-center justify-between gap-4">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-indigo-700">
+              {project.title}
+            </h2>
+            <a
+              href={project.links[0]}
+              className="shrink-0 rounded-lg bg-indigo-600 text-white text-sm font-bold px-4 py-2 hover:bg-indigo-700 transition-colors"
+            >
+              View on GitHub
+            </a>
+          </div>
+          <p className="mt-2 text-sm md:text-base">{project.desc}</p>
+          {project.tech?.length > 0 && (
+            <div className="mt-3 flex flex-wrap gap-2">
+              {project.tech.map((t) => (
+                <span
+                  key={t}
+                  className="rounded-full bg-indigo-600/15 border border-indigo-600/30 text-indigo-800 text-xs md:text-sm font-semibold px-3 py-1"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
           )}
-        </Swiper>
-      </div>
-
-    </Section >
-  )
-}
+          <div className="mt-4 flex-1 min-h-0 flex items-center justify-center rounded-lg bg-indigo-900/10 p-3">
+            <img
+              src={project.img}
+              className={`max-h-full object-contain rounded-md ${portrait ? "max-w-[40%]" : "max-w-full"}`}
+            />
+          </div>
+        </div>
+      </motion.div>
+    </Section>
+  );
+};
 const ContactSection = () => {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const form = useRef(null);

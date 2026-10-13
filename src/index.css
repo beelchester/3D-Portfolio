@@ -7,8 +7,31 @@
   height: 100vh;
 }
 
+html,
+body {
+  background-color: #d6cafa;
+}
+
 body {
   margin: 0;
+}
+
+* {
+  scrollbar-color: #555555 #d6cafa;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #d6cafa;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #555555;
+  border-radius: 8px;
 }
 
 /* Styles for carousel */

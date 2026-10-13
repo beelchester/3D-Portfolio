@@ -7,46 +7,58 @@ export const ScrollManager = (props) => {
   const { section, onSectionChange } = props;
 
   const data = useScroll();
-  const lastScroll = useRef(0);
+  const lastPos = useRef(0);
   const isAnimating = useRef(false);
+  const cooldownUntil = useRef(0);
 
   data.fill.classList.add("top-0");
   data.fill.classList.add("absolute");
 
-  useEffect(() => {
+  const goTo = (index) => {
     gsap.to(data.el, {
       duration: 1,
-      scrollTop: section * data.el.clientHeight,
+      scrollTop: index * data.el.clientHeight,
+      overwrite: true,
       onStart: () => {
         isAnimating.current = true;
       },
       onComplete: () => {
         isAnimating.current = false;
+        cooldownUntil.current = performance.now() + 500;
+        lastPos.current = data.el.scrollTop / data.el.clientHeight;
       },
     });
+  };
+
+  useEffect(() => {
+    goTo(section);
   }, [section]);
 
   useFrame(() => {
-    if (isAnimating.current) {
-      lastScroll.current = data.scroll.current;
+    const pos = data.el.scrollTop / data.el.clientHeight;
+    if (isAnimating.current || performance.now() < cooldownUntil.current) {
+      lastPos.current = pos;
       return;
     }
 
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    const curSection = Math.floor(data.scroll.current * data.pages);
-    if (curSection == 3 && !isMobile) {
-      onSectionChange(3);
+    const last = data.pages - 1;
+    const delta = pos - lastPos.current;
+    lastPos.current = pos;
+
+    if (Math.abs(delta) < 0.002) return;
+
+    let target = null;
+    if (delta > 0) {
+      target = Math.min(Math.floor(pos - delta) + 1, last);
+    } else {
+      target = Math.max(Math.ceil(pos - delta) - 1, 0);
     }
-    if (data.scroll.current > lastScroll.current && curSection === 0) {
-      onSectionChange(1);
+
+    if (target === section) {
+      goTo(target);
+    } else {
+      onSectionChange(target);
     }
-    if (
-      data.scroll.current < lastScroll.current &&
-      data.scroll.current < 1 / (data.pages - 1)
-    ) {
-      onSectionChange(0);
-    }
-    lastScroll.current = data.scroll.current;
   });
 
   return null;
